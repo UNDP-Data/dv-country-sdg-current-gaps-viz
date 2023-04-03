@@ -16,7 +16,6 @@ interface WidthProps {
 
 const GraphContainer = styled.div<WidthProps>`
   width: ${props => props.width};
-  flex-grow: 1;
   flex-basis: 30rem;
 `;
 
@@ -34,7 +33,7 @@ function App(props: Props) {
     );
   }, [country]);
   return (
-    <div className='undp-container flex-div flex-wrap flex-hor-align-center'>
+    <div className='undp-container'>
       {data ? (
         <div
           className='flex-div flex-wrap'
@@ -45,7 +44,7 @@ function App(props: Props) {
             margin: 'auto',
           }}
         >
-          <GraphContainer width='calc(40% - 1rem)'>
+          <GraphContainer width='calc(30% - 1rem)' style={{ margin: '0 auto' }}>
             <svg
               width='100%'
               style={{
@@ -181,13 +180,16 @@ function App(props: Props) {
               </text>
             </svg>
           </GraphContainer>
-          <GraphContainer width='calc(60% - 1rem)'>
+          <GraphContainer width='calc(70% - 1rem)' style={{ flexGrow: 1 }}>
             <div className='margin-bottom-09'>
               <h4
                 className='undp-typography margin-bottom-00'
                 style={{ color: 'var(--dark-green)' }}
               >
-                <span className='bold'>
+                <span
+                  className='bold'
+                  style={{ fontSize: 'inherit !important' }}
+                >
                   {sortBy(
                     data.filter(d => d.status === 'On Track'),
                     'goal',
@@ -233,7 +235,7 @@ function App(props: Props) {
                 className='undp-typography margin-bottom-00'
                 style={{ color: 'var(--dark-yellow)' }}
               >
-                <span className='bold'>
+                <span className='bold inherit'>
                   {sortBy(
                     data.filter(d => d.status === 'For Review'),
                     'goal',
@@ -280,7 +282,10 @@ function App(props: Props) {
                 className='undp-typography margin-bottom-00'
                 style={{ color: 'var(--dark-red)' }}
               >
-                <span className='bold'>
+                <span
+                  className='bold'
+                  style={{ fontSize: 'inherit !important' }}
+                >
                   {
                     sortBy(
                       data.filter(d => d.status === 'Identified Gap'),
@@ -314,12 +319,15 @@ function App(props: Props) {
                 </div>
               </div>
             </div>
-            <div>
+            <div className='margin-bottom-09'>
               <h4
                 className='undp-typography margin-bottom-00'
                 style={{ color: 'var(--gray-600)' }}
               >
-                <span className='bold'>
+                <span
+                  className='bold'
+                  style={{ fontSize: 'inherit !important' }}
+                >
                   {
                     sortBy(
                       data.filter(d => d.status === null),
@@ -353,6 +361,19 @@ function App(props: Props) {
                 </div>
               </div>
             </div>
+            <a
+              href={`https://data.undp.org/sdg-push-diagnostic/${country}/sdg-trends`}
+              target='_blank'
+              rel='noreferrer'
+              className='undp-style'
+            >
+              <button
+                type='button'
+                className='undp-button button-primary button-arrow'
+              >
+                View Details in SDG Push Diagnostic
+              </button>
+            </a>
           </GraphContainer>
         </div>
       ) : (
