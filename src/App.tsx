@@ -235,7 +235,10 @@ function App(props: Props) {
                 className='undp-typography margin-bottom-00'
                 style={{ color: 'var(--dark-yellow)' }}
               >
-                <span className='bold inherit'>
+                <span
+                  className='bold'
+                  style={{ fontSize: 'inherit !important' }}
+                >
                   {sortBy(
                     data.filter(d => d.status === 'For Review'),
                     'goal',
